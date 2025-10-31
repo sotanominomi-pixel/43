@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>N Clock — Nclock</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <h1 class="title">N Clock</h1>
+    </header>
+
+    <main class="main">
+      <div id="display" class="time-display" aria-live="polite">00:00</div>
+
+      <div id="sliderBox" class="slider-box">
+        <div class="label-row">
+          <div id="labelLeft" class="label-left">1日の長さ</div>
+          <div id="labelHours" class="label-right">24 時間</div>
+        </div>
+        <input id="sliderHours" type="range" min="12" max="48" step="1" value="24" aria-label="1日の長さ">
+      </div>
+
+      <nav class="tabs" role="tablist" aria-label="mode">
+        <button id="tabClock" class="tab active" role="tab" data-key="tab.clock">時計</button>
+        <button id="tabStopwatch" class="tab" role="tab" data-key="tab.stopwatch">ストップウォッチ</button>
+        <button id="tabAlarm" class="tab" role="tab" data-key="tab.alarm">アラーム</button>
+        <button id="tabSettings" class="tab" role="tab" data-key="tab.settings">設定</button>
+
+        <select id="langSelect" class="lang-select" aria-label="language">
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+        </select>
+      </nav>
+
+      <section id="stopwatchArea" class="panel" aria-hidden="true">
+        <div class="controls">
+          <button id="swStart" class="btn-circle btn-start" aria-pressed="false" data-key-start="btn.start">Start</button>
+          <button id="swLap" class="btn-rect mono" disabled data-key="btn.lap">Lap</button>
+          <button id="swReset" class="btn-rect mono" disabled data-key="btn.reset">Reset</button>
+        </div>
+        <div id="lapList" class="lap-list" aria-live="polite"></div>
+      </section>
+
+      <section id="alarmArea" class="panel" aria-hidden="true">
+        <div class="alarm-controls">
+          <input id="alarmTime" type="time" class="time-input" step="60" aria-label="アラーム時刻">
+          <button id="alarmSetBtn" class="btn-large mono" data-key="btn.addAlarm">アラーム追加</button>
+        </div>
+        <div id="alarmsContainer" class="alarms-container" aria-live="polite"></div>
+      </section>
+
+      <section id="settingsArea" class="panel" aria-hidden="true">
+        <div class="settings-row">
+          <label class="setting-label" data-key="settings.showSeconds">秒数表示</label>
+          <div class="toggle-row">
+            <label class="switch">
+              <input id="secondsToggle" type="checkbox" />
+              <span class="slider-switch"></span>
+            </label>
+            <span id="secondsLabel" class="sec-label">表示</span>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <label class="setting-label" data-key="settings.language">言語</label>
+          <div>
+            <select id="langSelectSettings" class="lang-select">
+              <option value="ja">日本語</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-key="footer">設定は自動で保存されます。</footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
